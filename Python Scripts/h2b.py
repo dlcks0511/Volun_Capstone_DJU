@@ -169,15 +169,15 @@ def letter(hangul_letter):
     for i in range(len(hangul_decomposed)):
         hangul = hangul_decomposed[i]
         if i == 0 and hangul in MATCH_H2B_CHO:
-            result.append([hangul, MATCH_H2B_CHO[hangul]])
+            result += MATCH_H2B_CHO[hangul]
         if i == 0 and hangul in MATCH_H2B_ALPHABET:
-            result.append([hangul, MATCH_H2B_ALPHABET[hangul]])
+            result += MATCH_H2B_ALPHABET[hangul]
         if i == 1 and hangul in MATCH_H2B_JOONG:
-            result.append([hangul, MATCH_H2B_JOONG[hangul]])
+            result += MATCH_H2B_JOONG[hangul]
         if i == 2 and hangul in MATCH_H2B_JONG:
-            result.append([hangul, MATCH_H2B_JONG[hangul]])
+            result += MATCH_H2B_JONG[hangul]
     if result == []:
-        result.append([hangul, [[0,0,0,0,0,0]]])
+        result.append([0,0,0,0,0,0])
     return result
 
 
@@ -192,5 +192,5 @@ def text(hangul_sentence):
     result = []
 
     for hangul_letter in hangul_sentence:
-        result.append([hangul_letter, letter(hangul_letter)])
+        result+=letter(hangul_letter)
     return result

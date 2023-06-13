@@ -1,5 +1,6 @@
 import os
 import time
+import h2b
 
 class Pororo:
     def __init__(self, data_pin, latch_pin, clock_pin, no):
@@ -37,6 +38,21 @@ no_module = 3
 pp = Pororo(2,3,4,no_module)
 
 while True:
+    #say = input("Input message")
+    braille_list = h2b.text("안녕하세요")
+    
+    for i in braille_list:
+       
+        for j in range(6):
+            if i[j]==0:
+                pp.on(0, j)
+        pp.refresh()
+        time.sleep(1)
+        pp.all_off()
+        pp.refresh()
+
+
+    """
     for i in range(no_module):
         for j in range(6):
             pp.on(i, j)
@@ -46,3 +62,4 @@ while True:
             pp.off(i, j)
             pp.refresh()
             time.sleep(1)
+            """
