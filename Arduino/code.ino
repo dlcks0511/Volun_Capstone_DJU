@@ -9,7 +9,7 @@ braille bra(dataPin, latchPin, clockPin, no_module);
 
 void setup() 
 {
-  bra.begin();
+  bra.begin(); 
 }
 
 void loop() 
