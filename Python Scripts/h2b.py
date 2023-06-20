@@ -166,7 +166,7 @@ def brailleTranslator(w):
         if i == 1 and hangul in koreanSecond:
             result += koreanSecond[hangul]
         if i == 2 and hangul in koreanThird:
-            result += koreanThird[hangul]
+            result += koreanThird[hangul] 
     if result == []:
         result.append([0,0,0,0,0,0])
     return result

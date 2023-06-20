@@ -32,7 +32,7 @@ class Pororo:
     def all_off(self):
         for i in range(3):
             for j in range(6):
-                self.resPin[i][j] = 0
+                self.resPin[i][j] = 0 
 
 
 no_module = 3
