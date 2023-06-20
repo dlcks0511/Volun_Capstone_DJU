@@ -1,6 +1,6 @@
 import hgtk
 
-MATCH_H2B_CHO = {
+koreanFirst = {
     u'ㄱ': [[0,0,0,1,0,0]],
     u'ㄴ': [[1,0,0,1,0,0]],
     u'ㄷ': [[0,1,0,1,0,0]],
@@ -23,7 +23,7 @@ MATCH_H2B_CHO = {
     u'ㅉ': [[0,0,0,0,0,1], [0,0,0,1,0,1]],
 }
 
-MATCH_H2B_JOONG = {
+koreanSecond = {
     u'ㅏ': [[1,1,0,0,0,1]],
     u'ㅑ': [[0,0,1,1,1,0]],
     u'ㅓ': [[0,1,1,1,0,0]],
@@ -47,7 +47,7 @@ MATCH_H2B_JOONG = {
     u'ㅢ': [[0,1,0,1,1,1]],
 }
 
-MATCH_H2B_JONG = {
+koreanThird = {
     u'ㄱ': [[1,0,0,0,0,0]],
     u'ㄴ': [[0,1,0,0,1,0]],
     u'ㄷ': [[0,0,1,0,1,0]],
@@ -78,7 +78,7 @@ MATCH_H2B_JONG = {
     u'ㅆ': [[0,0,1,1,0,0]],
 }
 
-MATCH_H2B_ALPHABET = {
+english = {
     'a': [[1,0,0,0,0,0]],
     'b': [[1,1,0,0,0,0]],
     'c': [[1,0,0,1,0,0]],
@@ -153,44 +153,29 @@ MATCH_H2B_ALPHABET = {
 }
 
 
-def letter(hangul_letter):
-    """
-    Convert a hangul letter to 6-dot braille
-    (alphabet, number, and some special chracter supported)
-
-    :param str hangul: a hangul chracter to convert to braille
-    :return: braille data (6-int list with the value 0 or 1)
-    :rtype: list[str, list[int]]
-    """
+def brailleTranslator(w):
     result = []
-    hangul_decomposed = hgtk.text.decompose(hangul_letter[0])
-    hangul_decomposed = \
-        hangul_decomposed.replace(hgtk.text.DEFAULT_COMPOSE_CODE, '')
-    for i in range(len(hangul_decomposed)):
-        hangul = hangul_decomposed[i]
-        if i == 0 and hangul in MATCH_H2B_CHO:
-            result += MATCH_H2B_CHO[hangul]
-        if i == 0 and hangul in MATCH_H2B_ALPHABET:
-            result += MATCH_H2B_ALPHABET[hangul]
-        if i == 1 and hangul in MATCH_H2B_JOONG:
-            result += MATCH_H2B_JOONG[hangul]
-        if i == 2 and hangul in MATCH_H2B_JONG:
-            result += MATCH_H2B_JONG[hangul]
+    koreanTranslator = hgtk.text.decompose(w[0])
+    koreanTranslator = koreanTranslator.replace(hgtk.text.DEFAULT_COMPOSE_CODE, '')
+    for i in range(len(koreanTranslator)):
+        hangul = koreanTranslator[i]
+        if i == 0 and hangul in koreanFirst:
+            result += koreanFirst[hangul]
+        if i == 0 and hangul in english:
+            result += english[hangul]
+        if i == 1 and hangul in koreanSecond:
+            result += koreanSecond[hangul]
+        if i == 2 and hangul in koreanThird:
+            result += koreanThird[hangul]
     if result == []:
         result.append([0,0,0,0,0,0])
     return result
 
 
-def text(hangul_sentence):
-    """
-    Convert hangul sentence to list of 6-dot braille
-
-    :param str hangul: hangul text to convert to braille
-    :return: list of braille data (list of 6-int list with the value 0 or 1)
-    :rtype: list[str, list[str, list[int]]]
-    """
+def text(word):
     result = []
 
-    for hangul_letter in hangul_sentence:
-        result+=letter(hangul_letter)
+    for w in word:
+        result+=brailleTranslator(w)
+        
     return result
