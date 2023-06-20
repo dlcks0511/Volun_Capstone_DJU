@@ -38,7 +38,7 @@ def stt( ):
     wf.setsampwidth(audio.get_sample_size(FORMAT))
     wf.setframerate(RATE)
     wf.writeframes(b''.join(frames))
-    wf.close()
+    wf.close() 
 
     # 오디오 파일 입력
     filename = "output.wav"
