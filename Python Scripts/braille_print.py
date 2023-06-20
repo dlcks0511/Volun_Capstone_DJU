@@ -3,7 +3,7 @@ import time
 import h2b
 import stt
 
-class Pororo:
+class Braille:
     def __init__(self, data_pin, latch_pin, clock_pin, no):
         #self.data = [0] * MAX_BRAILLE_NO
         self.data_pin = data_pin
@@ -36,7 +36,7 @@ class Pororo:
 
 
 no_module = 3
-pp = Pororo(2,3,4,no_module)
+pp = Braille(2,3,4,no_module)
 
 while True:
     #say = input("Input message")
